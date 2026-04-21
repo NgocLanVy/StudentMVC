@@ -1,0 +1,17 @@
+1.Danh sách sinh viên đầy đủ: https://localhost:7258/Student/ListStudents
+
+2. Nhóm Action trả về chữ (String/Content)
+Trang Welcome: https://localhost:7258/Student/Index
+https://localhost:7258/HomeStudent
+https://localhost:7258/Student/ListAll
+https://localhost:7258/Liet-ke-danh-sach-sinh-vien
+thêm: https://localhost:7258/Student/AddStudent
+xóa: https://localhost:7258/Student/DelStudent
+
+3. Nhóm kiểm tra tham số (Query String - ID)https://localhost:7258/Student/List?id=10
+bad: https://localhost:7258/Student/List
+notfound: https://localhost:7258/Student/List?id=9999
+
+4. Nhóm Tải file & Chuyển hướng
+https://localhost:7258/File/Download-file
+https://localhost:7258/Edit-student

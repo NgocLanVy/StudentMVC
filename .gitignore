@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.db
+node_modules/
+wwwroot/lib/
+appsettings.Development.json
