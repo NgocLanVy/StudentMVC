@@ -15,7 +15,7 @@ namespace StudentMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("ListStudents", "Student");
         }
 
         public IActionResult Privacy()
