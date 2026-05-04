@@ -9,11 +9,11 @@ namespace StudentMVC.Controllers
     {
         private static List<Student> listStudents = new List<Student>()
         {
-            new Student { Id = 1, Name = "Lan Vy", Age = 19, Gender = false, ImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBWVQ0dDIcviaXW6DyFP4t5IxXOHE83zGBEyGoZinHlvIkss&s", Des = "Sinh viên K21" },
-            new Student { Id = 2, Name = "Ngọc Ánh", Age = 20, Gender = false, ImgUrl = "https://clipart-library.com/img/1421105.png", Des = "Sinh viên K21" },
-            new Student { Id = 3, Name = "Ngọc Uyên", Age = 19, Gender = false, ImgUrl = "https://clipart-library.com/img/1421105.png", Des = "Sinh viên K21" },
-            new Student { Id = 4, Name = "Văn Quân", Age = 23, Gender = true, ImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBWVQ0dDIcviaXW6DyFP4t5IxXOHE83zGBEyGoZinHlvIkss&s", Des = "Sinh viên K21" },
-            new Student { Id = 5, Name = "Đức Hòa", Age = 19, Gender = true, ImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBWVQ0dDIcviaXW6DyFP4t5IxXOHE83zGBEyGoZinHlvIkss&s", Des = "Sinh viên K21" }
+            new Student { Id = 1, Name = "Lan Vy", Age = 19, Gender = false, ImgUrl = "https://img.pikbest.com/origin/06/48/71/942pIkbEsTrNP.jpg!bw800", Des = "Sinh viên K21" },
+            new Student { Id = 2, Name = "My My", Age = 20, Gender = false, ImgUrl = "https://img.pikbest.com/origin/06/48/71/942pIkbEsTrNP.jpg!bw800", Des = "Sinh viên K21" },
+            new Student { Id = 3, Name = "Ngọc Ngọc", Age = 19, Gender = false, ImgUrl = "https://img.pikbest.com/origin/06/48/71/942pIkbEsTrNP.jpg!bw800", Des = "Sinh viên K21" },
+            new Student { Id = 4, Name = "Văn Văn", Age = 23, Gender = true, ImgUrl = "https://img.pikbest.com/origin/09/10/48/85xpIkbEsTdQN.png!bw800", Des = "Sinh viên K21" },
+            new Student { Id = 5, Name = "Nguyên Nguyên", Age = 19, Gender = true, ImgUrl = "https://img.pikbest.com/origin/09/10/48/85xpIkbEsTdQN.png!bw800", Des = "Sinh viên K21" }
         };
 
         [Route("Student")]
