@@ -1,71 +1,91 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentMVC.Models;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StudentMVC.Controllers
 {
     public class StudentController : Controller
     {
-        [Route("HomeStudent")]
-        [Route("Student")]
-        [Route("Student/ListAll")]
-        [Route("Liet-ke-danh-sach-sinh-vien")]
-        public string ListAll()
+        private static List<Student> listStudents = new List<Student>()
         {
-            return "Liệt kê danh sách sinh viên";
+            new Student { Id = 1, Name = "Lan Vy", Age = 19, Gender = false, ImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBWVQ0dDIcviaXW6DyFP4t5IxXOHE83zGBEyGoZinHlvIkss&s", Des = "Sinh viên K21" },
+            new Student { Id = 2, Name = "Ngọc Ánh", Age = 20, Gender = false, ImgUrl = "https://clipart-library.com/img/1421105.png", Des = "Sinh viên K21" },
+            new Student { Id = 3, Name = "Ngọc Uyên", Age = 19, Gender = false, ImgUrl = "https://clipart-library.com/img/1421105.png", Des = "Sinh viên K21" },
+            new Student { Id = 4, Name = "Văn Quân", Age = 23, Gender = true, ImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBWVQ0dDIcviaXW6DyFP4t5IxXOHE83zGBEyGoZinHlvIkss&s", Des = "Sinh viên K21" },
+            new Student { Id = 5, Name = "Đức Hòa", Age = 19, Gender = true, ImgUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBWVQ0dDIcviaXW6DyFP4t5IxXOHE83zGBEyGoZinHlvIkss&s", Des = "Sinh viên K21" }
+        };
+
+        [Route("Student")]
+        [Route("Student/ListStudents")]
+        public IActionResult ListStudents()
+        {
+            return View(listStudents);
         }
+
+        public IActionResult Details(int id)
+        {
+            var student = listStudents.FirstOrDefault(s => s.Id == id);
+            if (student == null) return NotFound("Không tìm thấy sinh viên!");
+            return View(student);
+        }
+
+        [HttpGet]
+        public IActionResult AddStudent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddStudent(Student student)
+        {
+            student.Id = listStudents.Any() ? listStudents.Max(s => s.Id) + 1 : 1;
+            listStudents.Add(student);
+            return RedirectToAction("ListStudents");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var student = listStudents.FirstOrDefault(s => s.Id == id);
+            if (student == null) return NotFound();
+            return View(student);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Student student)
+        {
+            var existingStudent = listStudents.FirstOrDefault(s => s.Id == student.Id);
+            if (existingStudent != null)
+            {
+                existingStudent.Name = student.Name;
+                existingStudent.Age = student.Age;
+                existingStudent.Gender = student.Gender;
+                existingStudent.ImgUrl = student.ImgUrl;
+                existingStudent.Des = student.Des;
+            }
+            return RedirectToAction("ListStudents");
+        }
+        public IActionResult Delete(int id)
+        {
+            var student = listStudents.FirstOrDefault(s => s.Id == id);
+            if (student != null)
+            {
+                listStudents.Remove(student);
+            }
+            return RedirectToAction("ListStudents");
+        }
+
+        [Route("Student/Index")]
         public ContentResult Index()
         {
-            return new ContentResult()
-            {
-                Content = "Welcome to Student page",
-                ContentType = "text/plain"
-            };
+            return Content("Welcome to Student page", "text/plain");
         }
+
         [Route("File/Download-file")]
         public FileResult DownloadPdf()
         {
             return File("/linq.pdf", "application/pdf");
-        }
-
-        [Route("Student/List")]
-        public IActionResult ListOnlyStudent(int? id)
-        {
-            if (!id.HasValue)
-                return BadRequest("ID không được rỗng");
-
-            if (id < 1 || id > 1000)
-                return NotFound("Không tìm thấy sinh viên");
-
-            return Content("Thong tin sinh vien: " + id, "text/html");
-        }
-
-        [Route("Edit-student")]
-        public IActionResult EditStudent()
-        {
-            return LocalRedirect("~/Home/Index");
-        }
-
-        public string AddStudent()
-        {
-            return "Thêm thông tin một sinh viên";
-        }
-
-        public string DelStudent()
-        {
-            return "Xóa thông tin một sinh viên";
-        }
-        public IActionResult ListStudents()
-        {
-            List<Student> list = new List<Student>()
-            {
-                new Student { Id = 1, Name = "Tèo", Age = 20, Gender = true, Des = "Sinh viên CNTT" },
-                new Student { Id = 2, Name = "Tý", Age = 19, Gender = false, Des = "Sinh viên Kinh tế" },
-                new Student { Id = 3, Name = "Tủn", Age = 21, Gender = true, Des = "Sinh viên Ngoại ngữ" }
-            };
-
-            return View(list);
         }
     }
 }

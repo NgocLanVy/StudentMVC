@@ -1,57 +1,49 @@
 ﻿@model List<StudentMVC.Models.Student>
 
-@{
-    ViewData["Title"] = "Danh sách sinh viên";
-}
+<div class="container mt-4">
+    <h1 class="fw-bold">Thông tin sinh viên lớp K21</h1>
 
-<h1 style="color:blue">TRIỂN KHAI VIEW - MVC</h1>
-<h2 class="text-danger">DANH SÁCH SINH VIÊN</h2>
-
-<hr />
-
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>Mã SV</th>
-            <th>Họ tên</th>
-            <th>Tuổi</th>
-            <th>Giới tính</th>
-            <th>Hình ảnh</th>
-            <th>Mô tả</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var s in Model)
-        {
+    <table class="table table-bordered align-middle text-center">
+        <thead class="table-light">
             <tr>
-                <td>@s.Id</td>
-                <td>@s.Name</td>
-                <td>@s.Age</td>
-                <td>@(s.Gender ? "Nam" : "Nữ")</td>
-                <td>
-                    <img src="@s.ImgUrl" alt="@s.Name" style="width:50px; height:auto;" />
-                </td>
-                <td>@s.Des</td>
-                <td>
-                    <a class="btn btn-warning btn-sm">Edit</a>
-                    <a class="btn btn-danger btn-sm">Delete</a>
-                </td>
+                <th>STT</th>
+                <th>Tên</th>
+                <th>Tuổi</th>
+                <th>Giới tính</th>
+                <th>Hình ảnh</th>
+                <th>Chi tiết</th>
+                <th>Chỉnh sửa</th>
+                <th>Xóa</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{
+                int stt = 1;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@stt</td>
+                    <td class="text-start">@item.Name</td>
+                    <td>@item.Age</td>
+                    <td>@(item.Gender ? "Nam" : "Nữ")</td>
+                    <td>
+                        <img src="@item.ImgUrl" alt="avatar" style="width: 80px;" />
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Detail</a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-primary">Delete</a>
+                    </td>
+                </tr>
+                stt++;
+            }
+        </tbody>
+    </table>
 
-<br />
-
-<h3>Test các Action trong Controller</h3>
-<ul>
-    <li><a href="/Student/ListAll">1. Action trả String</a></li>
-    <li><a href="/Index">2. ContentResult</a></li>
-    <li><a href="/Student/List?id=100">3. BadRequest / NotFound (Hợp lệ)</a></li>
-    <li><a href="/Student/List?id=2000">3. BadRequest / NotFound (Lỗi)</a></li>
-    <li><a href="/File/Download-file">4. FileResult</a></li>
-    <li><a href="/Edit-student">5. LocalRedirect</a></li>
-    <li><a href="/Student/ListAll">6. RedirectToAction</a></li>
-</ul>
+    <a asp-action="AddStudent" class="btn btn-link p-0">Add</a>
+</div>

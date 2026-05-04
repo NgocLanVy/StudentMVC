@@ -1,0 +1,30 @@
+﻿@model StudentMVC.Models.Student
+
+<div class="container">
+    <h2>Chỉnh sửa thông tin</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label>Họ tên:</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Tuổi:</label>
+            <input asp-for="Age" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Giới tính:</label>
+            <select asp-for="Gender" class="form-control">
+                <option value="true">Nam</option>
+                <option value="false">Nữ</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <a asp-action="ListStudents" class="btn btn-secondary">Quay lại</a>
+    </form>
+</div>
